@@ -11,6 +11,18 @@ class ListNode {
         this.val = (val===undefined ? 0 : val)
         this.next = (next===undefined ? null : next)
     }
+    append(val) {
+        const newNode = new ListNode(val)
+        if (this.val === null) {
+            this.val = newNode
+            return
+        }
+        let walker = this
+        while (walker.next) {
+            walker = walker.next
+        }
+        walker.next = newNode
+    }
     printAsArray() {
         let array = []
         let walker = this
@@ -24,61 +36,39 @@ class ListNode {
 }
 
 var addTwoNumbers = function(l1, l2) {
-    let arr1 = []
-    let arr2 = []
+    let l3 = new ListNode()
     let walker1 = l1
     let walker2 = l2
-    while (walker1) {
-        arr1.push(walker1.val)
-        walker1 = walker1.next
-    }
-    while (walker2) {
-        arr2.push(walker2.val)
-        walker2 = walker2.next
-    }
-    console.log(arr1, arr2)
-    arr1.reverse()
-    arr2.reverse()
-    let str1 = ""
-    let str2 = ""
-    arr1.forEach(char => str1 += char)
-    arr2.forEach(char => str2 += char)
-    console.log(str1, str2)
-    str1 = parseInt(str1)
-    str2 = parseInt(str2)
-    console.log(str1, str2)
-    let sum = str1 + str2
-    console.log(sum)
-    sum = sum.toString()
-    console.log(sum)
-    let revSum = ''
-    for (let i = sum.length - 1; i >= 0; i--) {
-        revSum += sum[i]
-    }
-    let l3 = new ListNode(revSum[0])
     let walker3 = l3
-    for (let i = 1; i < revSum.length; i++) {
-        walker3.next = new ListNode(revSum[i])
+    while (walker1 || walker2) {
+        let sum = walker3.val
+        if (walker1 && walker2) {
+            sum += (walker1.val + walker2.val)
+        }
+        else if (walker1) sum += walker1.val
+        else sum += walker2.val
+        if (sum < 10) {
+            walker3.val = sum
+            if (walker1?.next || walker2?.next) {
+                walker3.next = new ListNode()
+            }
+        } else {
+            walker3.val = sum % 10
+            walker3.next = new ListNode(1)
+        }
+        walker1 = walker1?.next
+        walker2 = walker2?.next
         walker3 = walker3.next
     }
     return l3
 };
 
 
-const l1 = new ListNode(0)
-l1.next = new ListNode(0)
-l1.next.next = new ListNode(0)
-l1.next.next.next = new ListNode(2)
+const l1 = new ListNode(9)
+l1.append(9)
+l1.append(9)
 
-const l2 = new ListNode(0)
-l2.next = new ListNode(0)
-l2.next.next = new ListNode(1)
+const l2 = new ListNode(1)
 
 let result = addTwoNumbers(l1, l2)
 result.printAsArray()
-
-// Bad Testcase: 
-// l1 = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
-// l2 = [5,6,4]
-// Output = [0,3,NaN,NaN,1]
-// Expected = [6,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
