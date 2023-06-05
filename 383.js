@@ -19,28 +19,16 @@ var canConstruct = function (ransomNote, magazine) {
         set(key) {
             let hash = this._hash(key)
             if (this.table[hash]) {
-                let i = 0
-                while (this.table[hash][i]) {
-                    i++
-                }
-                this.table[hash][i] = key
+                this.table[hash]++
             }
-            else {
-                this.table[hash] = [key]
-            }
+            else this.table[hash] = 1
         }
 
-        findAndRemove(key) {
+        check(key) {
             let hash = this._hash(key)
             if (this.table[hash]) {
-                let i = 0
-                while (this.table[hash][i]) {
-                    if (key === this.table[hash][i]) {
-                        this.table[hash][i] = 'removed'
-                        return true
-                    }
-                    else i++
-                }
+                this.table[hash]--
+                return true
             }
         }
     }
@@ -49,7 +37,7 @@ var canConstruct = function (ransomNote, magazine) {
         Table.set(char)
     }
     for (let char of ransomNote) {
-        if (!Table.findAndRemove(char)) return false
+        if (!Table.check(char)) return false
     }
     return true
 };
