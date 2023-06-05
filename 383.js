@@ -6,6 +6,23 @@ Each letter in magazine can only be used once in ransomNote.
 */
 
 var canConstruct = function (ransomNote, magazine) {
+    const map = {}
+    for (let char of magazine) {
+        map[char] ? map[char]++ : map[char] = 1
+    }
+    for (let char of ransomNote) {
+        if (map[char]) {
+            map[char]--
+        } else return false
+    }
+    return true
+}
+
+console.log(canConstruct('aa', 'aab'))
+
+
+/* Solution with HashTable Class
+var canConstruct = function (ransomNote, magazine) {
     class HashTable {
         constructor() {
             this.table = new Array(26)
@@ -41,5 +58,4 @@ var canConstruct = function (ransomNote, magazine) {
     }
     return true
 };
-
-console.log(canConstruct('aa', 'aab'))
+*/
