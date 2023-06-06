@@ -9,10 +9,22 @@ For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
 
 var mySqrt = function(x) {
     if (x <= 1) return x
-    for (let i = 0; i <= x; i++) {
-        if (i * i === x) return i
-        else if (i * i > x) return i - 1
+    let max = x
+    let min = 0
+    const avg = (min, max) => Math.floor((min + max) / 2)
+    let i = avg(min, max)
+    while (i * i !== x) {
+        if (i * i < x && (i + 1) * (i + 1) > x) {
+            return i
+        } else if (i * i > x) {
+            max = i
+            i = avg(min, max)
+        } else if (i * i < x) {
+            min = i
+            i = avg(min, max)
+        }
     }
+    return i
 };
 
-console.log(mySqrt(8))
+console.log(mySqrt(2))
