@@ -5,6 +5,8 @@
 # Each letter in magazine can only be used once in ransomNote.
 
 def canConstruct(ransomNote, magazine):
+    if len(ransomNote) > len(magazine): 
+        return False
     map = {}
     for char in magazine:
         if map.get(char): 
@@ -18,4 +20,4 @@ def canConstruct(ransomNote, magazine):
             return False
     return True
 
-print(canConstruct('abb', 'aba'))
+print(canConstruct('ab', 'aba'))
