@@ -9,18 +9,21 @@ class ListNode:
 
 def isPalindrome(head):
     if not head.next: return True
-    string = ''
+    arr = []
     walker = head
     while walker:
-        string += str(walker.val)
+        arr.append(walker.val)
         walker = walker.next
-    if string == string[::-1]:
-        return True
-    return False
+    walker = head
+    for i in range(len(arr)-1, -1, -1):
+        if walker.val != arr[i]:
+            return False
+        walker = walker.next
+    return True
 
 
 list = ListNode(2)
-list.next = ListNode(2)
-list.next.next = ListNode(1)
+list.next = ListNode(1)
+list.next.next = ListNode(2)
 
 print(isPalindrome(list))
