@@ -7,28 +7,28 @@ def maxProfit(prices):
     profit1 = 0
     profit2 = 0
     low = prices[0]
-    consecutive = True
+    consecutive1 = consecutive2 = False
     for i in range(1, len(prices)):
-        if prices[i] < low:
+        difference = prices[i] - low
+        if difference < 0:
             low = prices[i]
-            consecutive = False
-        elif prices[i] - low > profit1 and profit1 <= profit2:
-            if consecutive:
-                profit1 += prices[i] - low
+            consecutive1 = consecutive2 = False
+        elif difference > 0 and (consecutive1 or consecutive2):
+            if consecutive1:
+                profit1 += difference
                 low = prices[i]
-            else: 
-                profit1 = prices[i] - low
+            elif consecutive2:
+                profit2 += difference
                 low = prices[i]
-                consecutive = True
-        elif prices[i] - low > profit2:
-            if consecutive:
-                profit2 += prices[i] - low
-                low = prices[i]
-            else: 
-                profit2 = prices[i] - low
-                low = prices[i]
-                consecutive = True
-        print('p[i]:', prices[i], 'p1:', profit1, 'p2:', profit2, 'low:', low, consecutive)
+        elif difference > profit1 and profit1 <= profit2:
+            profit1 = difference
+            low = prices[i]
+            consecutive1 = True
+        elif difference > profit2:
+            profit2 = difference
+            low = prices[i]
+            consecutive2 = True
+        print('p[i]:', prices[i], 'p1:', profit1, 'p2:', profit2, 'low:', low, consecutive1, consecutive2)
     return profit1 + profit2
 
-print(maxProfit([1,2,3,4,5]))
+print(maxProfit([1,2,4,2,5,7,2,4,9,0]), 'Expected = 13')
