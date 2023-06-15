@@ -15,7 +15,7 @@ var convert = function (s, numRows) {
     if (numRows === 1) return s
     const matrix = []
     for (let i = 0; i < numRows; i++) {
-        matrix.push([])
+        matrix.push('')
     }
     let i = 0
     let row = 0
@@ -24,12 +24,12 @@ var convert = function (s, numRows) {
     while (i < s.length) {
         colIndicator = col % (numRows - 1)
         if (colIndicator === 0) {
-            matrix[row].push(s[i])
+            matrix[row] += s[i]
             i++
             row++
-        } else if (colIndicator !== 0) {
+        } else {
             if (row === (numRows - 1) - colIndicator) {
-                matrix[row].push(s[i])
+                matrix[row] += s[i]
                 i++
             }
             row++
@@ -39,16 +39,7 @@ var convert = function (s, numRows) {
             col++
         }
     }
-    let string = ''
-    for (let i = 0; i < matrix.length; i++) {
-        matrix[i] = matrix[i].reduce((acc, char) => {
-            return acc + char
-        })
-    }
-    for (let i = 0; i < matrix.length; i++) {
-        string += matrix[i]
-    }
-    return string
+    return matrix.reduce((acc, char) => acc + char)
 }
 
 console.log(convert('PAYPALISHIRING', 3), 'Expected: PAHNAPLSIIGYIR')
