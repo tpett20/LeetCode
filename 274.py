@@ -5,11 +5,12 @@
 
 def hIndex(citations):
     citations.sort()
-    i = len(citations) - 1
-    while i >= 0:
-        if citations[i] <= len(citations) - i:
-            return citations[i]
-        i -= 1
+    j = len(citations)
+    for i in range(len(citations)):
+        if citations[i] >= j:
+            return len(citations) - i
+        j -= 1
+    return 0
 
 print(hIndex([3,0,6,1,5]), 'Expected: 3')
 print(hIndex([1,3,1]), 'Expected: 1')
