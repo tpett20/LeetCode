@@ -23,25 +23,26 @@ class ListNode {
 
 var reverseBetween = function (head, left, right) {
     let walker = head
-    let leftNode = null
-    let nextNode = null
+    let count = 1
+    let revArray = []
     while (walker) {
-        if (walker.val >= left && walker.val <= right) {
-            walker.previous = walker.next
-            head.next = walker
-            if (leftNode === null) {
-                leftNode = walker
-            } else {
-                walker.next = nextNode
-            }
-            nextNode = walker
-            walker = walker.previous
-        } else if (walker.val >= right && leftNode) {
-            leftNode.next = walker
-            walker = walker.next
-        } else {
-            walker = walker.next
+        if (count >= left && count <= right) {
+            revArray.push(walker.val)
         }
+        count++
+        walker = walker.next
+    }
+    revArray = revArray.reverse()
+    count = 1
+    let i = 0
+    walker = head
+    while (walker) {
+        if (count >= left && count <= right) {
+            walker.val = revArray[i]
+            i++
+        }
+        count++
+        walker = walker.next
     }
     return head
 };
