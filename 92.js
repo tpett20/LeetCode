@@ -1,0 +1,56 @@
+// 92. Reverse Linked List II
+/*
+Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes of the list from position left to position right, and return the reversed list.
+*/
+
+// Definition for singly-linked list.
+class ListNode {
+    constructor(val, next) {
+        this.val = (val === undefined ? 0 : val)
+        this.next = (next === undefined ? null : next)
+    }
+    printAsArray() {
+        let array = []
+        let walker = this
+        while (walker) {
+            array.push(walker.val + ' ' + '->')
+            walker = walker.next
+        }
+        array.push('null')
+        console.log(array)
+    }
+}
+
+var reverseBetween = function (head, left, right) {
+    let walker = head
+    let leftNode = null
+    let nextNode = null
+    while (walker) {
+        if (walker.val >= left && walker.val <= right) {
+            walker.previous = walker.next
+            head.next = walker
+            if (leftNode === null) {
+                leftNode = walker
+            } else {
+                walker.next = nextNode
+            }
+            nextNode = walker
+            walker = walker.previous
+        } else if (walker.val >= right && leftNode) {
+            leftNode.next = walker
+            walker = walker.next
+        } else {
+            walker = walker.next
+        }
+    }
+    return head
+};
+
+let head = new ListNode(1)
+head.next = new ListNode(2)
+head.next.next = new ListNode(3)
+head.next.next.next = new ListNode(4)
+head.next.next.next.next = new ListNode(5)
+head.next.next.next.next.next = new ListNode(6)
+
+reverseBetween(head, 2, 5).printAsArray()
