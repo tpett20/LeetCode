@@ -3,22 +3,22 @@
 # Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
 
 def gcdOfStrings(str1, str2):
-    commonDenoms = []
-    denom = len(str1) if len(str1) < len(str2) else len(str2)
-    while denom > 1:
-        if len(str1) % denom == 0 and len(str2) % denom == 0:
-            commonDenoms.append(denom)
-        denom -= 1
-    for commonDenom in commonDenoms:
-        divisor = str1[0 : commonDenom]
-        longLen = len(str1) if len(str1) > len(str2) else len(str2)
+    commonFactors = []
+    factor = len(str1) if len(str1) < len(str2) else len(str2)
+    while factor >= 1:
+        if len(str1) % factor == 0 and len(str2) % factor == 0:
+            commonFactors.append(factor)
+        factor -= 1
+    for commonFactor in commonFactors:
+        divisor = str1[0 : commonFactor]
+        longerLen = len(str1) if len(str1) > len(str2) else len(str2)
         i = 0
         j = 0
         while i < len(str1) or i < len(str2):
             if i < len(str1) and i < len(str2):
                 if str1[i] != divisor[j] or str2[i] != divisor[j]:
                     return ''
-            elif j < len(str1):
+            elif i < len(str1):
                 if str1[i] != divisor[j]:
                     return ''
             else: 
@@ -27,6 +27,7 @@ def gcdOfStrings(str1, str2):
             i += 1
             j += 1
             if j == len(divisor): j = 0
-        if i == longLen: return divisor
+        if i == longerLen: return divisor
 
-print(gcdOfStrings('LEET', 'LODE'))
+print(gcdOfStrings('A', 'AA'))
+print(gcdOfStrings('ABABAB', 'ABAB'))
