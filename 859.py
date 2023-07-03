@@ -11,20 +11,19 @@ def buddyStrings(s, goal):
             if map.get(s[i]): return True
             else: map[s[i]] = True
         return False
-    sMap = {}
-    goalMap = {}
+    diffS = ''
+    diffGoal = ''
     swap = False
-    diffs = 0
     for i in range(len(s)):
         if s[i] != goal[i]:
-            diffs += 1
-            if diffs > 2: return False
             if swap: return False
-            if sMap.get(goal[i]) and goalMap.get(s[i]):
-                swap = True
-            elif not sMap.get(s[i]) and not goalMap.get(goal[i]):
-                sMap[s[i]] = True
-                goalMap[goal[i]] = True
+            if diffS and diffGoal:
+                if s[i] == diffGoal and goal[i] == diffS:
+                    swap = True
+                else: return False
+            else:
+                diffS = s[i]
+                diffGoal = goal[i]
     return swap
 
 print(buddyStrings("ab", "ba"))
