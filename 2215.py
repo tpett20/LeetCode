@@ -5,20 +5,23 @@
 # Note that the integers in the lists may be returned in any order.
 
 def findDifference(nums1, nums2):
-    map = {}
+    map1 = {}
+    map2 = {}
     answer = [[], []]
     for num in nums1:
-        if not map.get(num):
-            map[num] = 'nums1'
+        if not map1.get(num):
+            map1[num] = 'nums1'
     for num in nums2:
-        if map.get(num):
-            map[num] = 'both'
+        if map1.get(num):
+            map1[num] = 'both'
         else:
-            answer[1].append(num)
-    for key in map:
-        if map[key] == 'nums1':
+            if not map2.get(num):
+                map2[num] = 'nums2'
+    for key in map1:
+        if map1[key] == 'nums1':
             answer[0].append(key)
+    for key in map2:
+        answer[1].append(key)
     return answer
             
-
-print(findDifference([-80,-15,-81,-28,-61,63,14,-45,-35,-10], [-1,-40,-44,41,10,-43,69,10,2]))
+print(findDifference([1,9,9], [1,10,10]))
