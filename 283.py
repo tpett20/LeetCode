@@ -3,16 +3,15 @@
 # Note that you must do this in-place without making a copy of the array.
 
 def moveZeroes(nums):
-    i = 0
     count = 0
-    length = len(nums)
-    while i < length:
+    for i in range(len(nums)):
         if nums[i] != 0:
             nums[count] = nums[i]
             count += 1
-        i += 1
     for i in range(count, len(nums)):
         nums[i] = 0
-    return nums
 
-print(moveZeroes([0,1,0,3,12]))
+nums = [0,1,0,3,12]
+print(nums, '= Input')
+moveZeroes(nums)
+print(nums, '= Output')
