@@ -5,19 +5,19 @@ Find a contiguous subarray whose length is equal to k that has the maximum avera
 */
 
 var findMaxAverage = function (nums, k) {
-    let maxAvg
-    let i = 0
-    while (i <= nums.length - k) {
-        let window = nums.slice(i, k + i)
-        let avg = window.reduce((acc, num) => {
-            return acc + num
-        }) / k
-        if (maxAvg === undefined) {
-            maxAvg = avg
-        } else if (avg > maxAvg) {
+    let sum = nums.slice(0, k).reduce((acc, num) => {
+        return acc + num
+    })
+    let maxAvg = sum / k
+    let start = 0
+    for (let i = k; i < nums.length; i++) {
+        sum -= nums[start]
+        sum += nums[i]
+        let avg = sum / k
+        if (avg > maxAvg) {
             maxAvg = avg
         }
-        i++
+        start++
     }
     return maxAvg
 };
