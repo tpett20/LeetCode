@@ -8,24 +8,39 @@ You can assume there are 3 possible input functions: sum, fib, and factorial.
 - factorial accepts a single integer n and returns 1 if n <= 1 or factorial(n - 1) * n otherwise.
 */
 
+// Cache as Hashmap Solution
 function memoize(fn) {
-    const cache = {}
+    const cache = new Map()
     return function(...args) {
-        if (cache[args] !== undefined) {
-            return cache[args]
+        let key = args.toString()
+        if (cache.has(key)) {
+            return cache.get(key)
         } else {
             let result = fn(...args)
-            cache[args] = result
+            cache.set(key, result)
             return result
         }
     }
 }
+// Cache as Object Solution
+// function memoize(fn) {
+//     const cache = {}
+//     return function(...args) {
+//         if (cache[args] !== undefined) {
+//             return cache[args]
+//         } else {
+//             let result = fn(...args)
+//             cache[args] = result
+//             return result
+//         }
+//     }
+// }
 
 let callCount = 0
 const memoizedFn = memoize(function (a, b) {
     callCount += 1
     return a + b
 })
-console.log(memoizedFn(2, 3)) // 5
-console.log(memoizedFn(2, 3)) // 5
-console.log(callCount) // 1 
+console.log(memoizedFn(2, 3))
+console.log(memoizedFn(2, 3))
+console.log(callCount)
