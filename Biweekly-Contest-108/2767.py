@@ -1,5 +1,5 @@
 # 2767. Partition String Into Minimum Beautiful Substrings
-# INCOMPLETE - Biweekly Contest 108
+# 🚫 INCOMPLETE - Biweekly Contest 108
 # Given a binary string s, partition the string into one or more substrings such that each substring is beautiful.
 # A string is beautiful if:
 # It doesn't contain leading zeros.

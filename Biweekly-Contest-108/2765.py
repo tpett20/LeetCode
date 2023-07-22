@@ -1,5 +1,5 @@
 # 2765. Longest Alternating Subarray
-# Biweekly Contest 108
+# 🏆 Biweekly Contest 108
 # You are given a 0-indexed integer array nums. A subarray s of length m is called alternating if:
 # m is greater than 1.
 # s1 = s0 + 1.
