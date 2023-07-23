@@ -1,0 +1,11 @@
+// 2724. Sort By
+/*
+Given an array arr and a function fn, return a sorted array sortedArr. You can assume fn only returns numbers and those numbers determine the sort order of sortedArr. sortedArray must be sorted in ascending order by fn output.
+You may assume that fn will never duplicate numbers for a given array.
+*/
+
+var sortBy = function(arr, fn) {
+    return arr.sort((a,b) => fn(a) - fn(b))
+};
+
+console.log(sortBy([[3, 4], [5, 2], [10, 1]], fn = (x) => x[1]))
