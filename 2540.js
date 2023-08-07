@@ -5,11 +5,31 @@ Note that an integer is said to be common to nums1 and nums2 if both arrays have
 */
 
 var getCommon = function(nums1, nums2) {
-    for (let i = 0; i < nums2.length; i++) {
-        if (nums1.includes(nums2[i])) {
+    let i = 0
+    const map1 = {}
+    const map2 = {}
+    while (i < nums1.length && i < nums2.length) {
+        map1[nums1[i]] = true
+        map2[nums2[i]] = true
+        if (map1[nums2[i]]) {
+            return nums2[i]
+        } else if (map2[nums1[i]]) {
+            return nums1[i]
+        }
+        i++
+    }
+    while (i < nums1.length) {
+        if (map2[nums1[i]]) {
+            return nums1[i]
+        }
+        i++
+    }
+    while (i < nums2.length) {
+        if (map1[nums2[i]]) {
             return nums2[i]
         }
-    } 
+        i++
+    }
     return -1
 };
 
