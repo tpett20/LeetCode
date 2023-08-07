@@ -15,16 +15,15 @@ var countPoints = function(rings) {
         let color = rings[i]
         let rod = rings[i + 1]
         if (!map[rod]) {
-            map[rod] = {}
+            map[rod] = { colors: 0 }
         }
-        map[rod][color] = true
+        if (!map[rod][color]) {
+            map[rod]['colors']++
+            map[rod][color] = true
+        }
     }
     for (let rod in map) {
-        let colorCount = 0
-        for (let color in map[rod]) {
-            colorCount++
-        }
-        if (colorCount === 3) {
+        if (map[rod]['colors'] === 3) {
             count++
         }
     }
