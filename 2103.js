@@ -20,11 +20,9 @@ var countPoints = function(rings) {
         if (!map[rod][color]) {
             map[rod]['colors']++
             map[rod][color] = true
-        }
-    }
-    for (let rod in map) {
-        if (map[rod]['colors'] === 3) {
-            count++
+            if (map[rod]['colors'] === 3) {
+                count++
+            }
         }
     }
     return count
