@@ -33,9 +33,55 @@ var copyRandomList = function(head) {
     newWalker = newHead
     while (walker) {
         let randomIdx = walker.random ? walker.random.idx : null
-        newWalker.random = map[randomIdx]
+        if (randomIdx !== null) {
+            newWalker.random = map[randomIdx]
+        } else {
+            newWalker.random = null
+        }
         walker = walker.next
         newWalker = newWalker.next
     }
     return newHead
 };
+
+class Node {
+    constructor(val, next, random) {
+        this.val = val;
+        this.next = next;
+        this.random = random;
+    }
+    printAsArray() {
+        let array = []
+        let walker = this
+        while (walker) {
+            let random = walker.random ? walker.random.val : null
+            array.push(`val: ${walker.val}, randomVal: ${random}`)
+            walker = walker.next
+        }
+        console.log(array)
+    }
+}
+
+const node1 = new Node(7)
+const node2 = new Node(13)
+const node3 = new Node(11)
+const node4 = new Node(10)
+const node5 = new Node(1)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+node5.next = null
+
+node1.random = null
+node2.random = node1
+node3.random = node5
+node4.random = node3
+node5.random = node1
+
+console.log("INPUT")
+node1.printAsArray()
+console.log("OUTPUT")
+const output = copyRandomList(node1)
+output.printAsArray()
