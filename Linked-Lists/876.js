@@ -1,9 +1,23 @@
 // 876. Middle of the Linked List
-/*
-Given the head of a singly linked list, return the middle node of the linked list.
+// Given the head of a singly linked list, return the middle node of the linked list.
+// If there are two middle nodes, return the second middle node.
 
-If there are two middle nodes, return the second middle node.
-*/
+var middleNode = function(head) {
+    let count = 0
+    let walker = head
+    while (walker) {
+        walker = walker.next
+        count++
+    }
+    let middle = count / 2
+    walker = head
+    count = 1
+    while (count <= middle) {
+        walker = walker.next
+        count++
+    }
+    return walker
+};
 
 // Definition for singly-linked list. 
 class ListNode {
@@ -30,24 +44,6 @@ class ListNode {
         console.log(array)
     }
 }
-
-var middleNode = function(head) {
-    let count = 0
-    let walker = head
-    while (walker) {
-        walker = walker.next
-        count++
-    }
-    let middle = count / 2
-    walker = head
-    count = 1
-    while (count <= middle) {
-        walker = walker.next
-        count++
-    }
-    return walker
-};
-
 
 const head = new ListNode(1)
 head.append(2)

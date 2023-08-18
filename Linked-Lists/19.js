@@ -1,7 +1,28 @@
 // 19. Remove Nth Node From End of List
-/*
-Given the head of a linked list, remove the nth node from the end of the list and return its head.
-*/
+// Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+var removeNthFromEnd = function (head, n) {
+    if (!head.next) {
+        return n > 1 ? head : null
+    }
+    let walker = head
+    let length = 0
+    while (walker) {
+        length++
+        walker = walker.next
+    }
+    let target = length - n
+    walker = head
+    if (target === 0) return walker.next
+    let count = 0
+    while (count < target - 1) {
+        count++
+        walker = walker.next
+    }
+    let nextNode = walker.next.next
+    walker.next = nextNode
+    return head
+};
 
 class ListNode {
     constructor(val, next) {
@@ -31,29 +52,6 @@ class ListNode {
         console.log(array)
     }
 }
-
-var removeNthFromEnd = function (head, n) {
-    if (!head.next) {
-        return n > 1 ? head : null
-    }
-    let walker = head
-    let length = 0
-    while (walker) {
-        length++
-        walker = walker.next
-    }
-    let target = length - n
-    walker = head
-    if (target === 0) return walker.next
-    let count = 0
-    while (count < target - 1) {
-        count++
-        walker = walker.next
-    }
-    let nextNode = walker.next.next
-    walker.next = nextNode
-    return head
-};
 
 const head = new ListNode(1)
 head.append(2)

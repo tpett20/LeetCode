@@ -1,12 +1,6 @@
 # 234. Palindrome Linked List
 # Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
 
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
 def isPalindrome(head):
     if not head.next: return True
     arr = []
@@ -21,6 +15,11 @@ def isPalindrome(head):
         walker = walker.next
     return True
 
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 list = ListNode(2)
 list.next = ListNode(1)

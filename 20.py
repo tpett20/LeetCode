@@ -1,20 +1,9 @@
-# def isValid(s):
-#     list = []
-#     check_list = []
-#     start_parens = ['{', '(', '[']
-#     for char in s:
-#         list.append(char)
-#     for i in range(len(list)):
-#         if list[i] in start_parens:
-#             check_list.append(list[i])
-#         elif check_list[len(check_list)-1] == '(' and list[i] == ')':
-#             check_list.pop()
-#         elif check_list[len(check_list)-1] == '[' and list[i] == ']':
-#             check_list.pop()
-#         elif check_list[len(check_list)-1] == '{' and list[i] == '}':
-#             check_list.pop()
-#     print(check_list)
-#     return True if not check_list else False
+# 20. Valid Parentheses
+# Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+# An input string is valid if:
+# 1. Open brackets must be closed by the same type of brackets.
+# 2. Open brackets must be closed in the correct order.
+# 3. Every close bracket has a corresponding open bracket of the same type.
 
 def isValid(s):
     check_str = ''
@@ -41,3 +30,22 @@ print(5, isValid("()[]{}"))
 print(6, isValid("(]"))
 print(7, isValid("({(})"))
 print(8, isValid("[]{}(({}))"))
+
+# Alt Solution Using a List
+# def isValid(s):
+#     list = []
+#     check_list = []
+#     start_parens = ['{', '(', '[']
+#     for char in s:
+#         list.append(char)
+#     for i in range(len(list)):
+#         if list[i] in start_parens:
+#             check_list.append(list[i])
+#         elif check_list[len(check_list)-1] == '(' and list[i] == ')':
+#             check_list.pop()
+#         elif check_list[len(check_list)-1] == '[' and list[i] == ']':
+#             check_list.pop()
+#         elif check_list[len(check_list)-1] == '{' and list[i] == '}':
+#             check_list.pop()
+#     print(check_list)
+#     return True if not check_list else False
