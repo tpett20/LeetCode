@@ -4,13 +4,16 @@
 
 var isUgly = function(n) {
     if (n < 1) return false
-    let i = 2
     while (n !== 1) {
-        if (n % i === 0) {
-            n = n / i
+        if (n % 2 === 0) {
+            n /= 2
+        } else if (n % 3 === 0) {
+            n /= 3
+        } else if (n % 5 === 0) {
+            n /= 5
+        } else {
+            return false
         }
-        else i++
-        if (i > 5) return false
     }
     return true
 };
