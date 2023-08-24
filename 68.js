@@ -49,38 +49,25 @@ var fullJustify = function (words, maxWidth) {
         for (let i = 0; i < ln.length; i++) {
             if (ln[i] === ' ') count++
         }
-        if (count === 0) {
-            return ln += space.repeat(diff)
-        } else {
-            let spacesEach = Math.floor(diff / count)
-            let extraSpaces = diff % count
-            let string = ''
-            if (spacesEach) {
-                string = ln.replaceAll(' ', space.repeat(spacesEach + 1))
-            }
-            if (extraSpaces && string) {
-                let i = 0
-                let string2 = ''
-                while (i < string.length) {
-                    if (string[i] === ' ' && string[i - 1] !== ' ' && extraSpaces) {
-                        string2 += '  '
-                        extraSpaces--
-                    } else string2 += string[i]
-                    i++
+        if (count === 0) return ln += space.repeat(diff)
+        let spacesEach = Math.floor(diff / count)
+        let extraSpaces = diff % count
+        let string = ln[0]
+        let i = 1
+        while (i < ln.length) {
+            string += ln[i]
+            if (ln[i] === ' ' && ln[i - 1] !== ' ') {
+                if (spacesEach) {
+                    string += space.repeat(spacesEach)
                 }
-                return string2
-            } else if (extraSpaces) {
-                let i = 0
-                while (i < ln.length) {
-                    if (ln[i] === ' ' && ln[i - 1] !== ' ' && extraSpaces) {
-                        string += '  '
-                        extraSpaces--
-                    } else string += ln[i]
-                    i++
+                if (extraSpaces) {
+                    string += ' '
+                    extraSpaces--
                 }
             }
-            return string
+            i++
         }
+        return string
     }
     return output
 };
