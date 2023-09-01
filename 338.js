@@ -6,7 +6,7 @@ var countBits = function(n) {
     arr[0] = 0
     let backToOne = false
     let maxOnes = 0
-    for (let i = 0; i <= n; i++) {
+    for (let i = 1; i <= n; i++) {
         if (backToOne) {
             arr[i] = 1
             backToOne = false
@@ -21,12 +21,13 @@ var countBits = function(n) {
         }
     }
     function countOnes(num) {
-        let binary = num.toString(2)
-        let oneCt = 0
-        for (let num of binary) {
-            if (num === '1') oneCt++
+        let oneCount = 0
+        while (num !== 0) {
+            let remainder = num % 2
+            oneCount += remainder
+            num = Math.floor(num / 2)
         }
-        return oneCt
+        return oneCount
     }
     return arr
 };
