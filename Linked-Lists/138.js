@@ -17,15 +17,14 @@ var copyRandomList = function(head) {
     let newWalker = newHead
     let idx = 0
     walker.idx = idx
-    const map = {}
-    map[idx] = newHead
+    const arr = [newHead]
     idx++
     walker = walker.next
     while (walker) {
         newWalker.next = new Node(walker.val)
         newWalker = newWalker.next
         walker.idx = idx
-        map[idx] = newWalker
+        arr.push(newWalker)
         walker = walker.next
         idx++
     }
@@ -33,11 +32,7 @@ var copyRandomList = function(head) {
     newWalker = newHead
     while (walker) {
         let randomIdx = walker.random ? walker.random.idx : null
-        if (randomIdx !== null) {
-            newWalker.random = map[randomIdx]
-        } else {
-            newWalker.random = null
-        }
+        newWalker.random = randomIdx !== null ? arr[randomIdx] : null
         walker = walker.next
         newWalker = newWalker.next
     }
