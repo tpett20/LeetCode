@@ -10,13 +10,13 @@ Return true if nums can be divided into n pairs, otherwise return false.
 var divideArray = function(nums) {
     if (nums.length % 2 !== 0) return false
     const map = {}
+    let oddCount = 0
     for (let num of nums) {
         map[num] = map[num] ? map[num] + 1 : 1
+        if (map[num] % 2 !== 0) oddCount++
+        else oddCount--
     }
-    for (let num in map) {
-        if (map[num] % 2 !== 0) return false
-    }
-    return true
+    return oddCount ? false : true
 };
 
 console.log(divideArray([3,2,3,2,2,2]))
