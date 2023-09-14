@@ -1,17 +1,16 @@
 // 83. Remove Duplicates from Sorted List
 // Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
 
-var deleteDuplicates = function (head) {
-    if (head === null || head.next === null) return head
+var deleteDuplicates = function(head) {
+    if (!head || !head.next) return head  
     let walker1 = head
     let walker2 = head.next
-    while (walker2) {
-        while (walker1.val === walker2?.val) {
+    while (walker1) {
+        while (walker2 && walker1.val === walker2.val) {
             walker2 = walker2.next
         }
         walker1.next = walker2
         walker1 = walker1.next
-        walker2 = walker2?.next
     }
     return head
 };
@@ -21,6 +20,14 @@ class ListNode {
     constructor(val, next) {
         this.val = (val === undefined ? 0 : val)
         this.next = (next === undefined ? null : next)
+    }
+    append(val) {
+        const newNode = new ListNode(val)
+        let walker = this
+        while (walker.next) {
+            walker = walker.next
+        }
+        walker.next = newNode
     }
     printAsArray() {
         const arr = []
@@ -34,12 +41,12 @@ class ListNode {
     }
 }
 
-let testCase = new ListNode(1)
-testCase.next = new ListNode(1)
-testCase.next.next = new ListNode(1)
-testCase.next.next.next = new ListNode(2)
-testCase.next.next.next.next = new ListNode(3)
-testCase.next.next.next.next.next = new ListNode(3)
+const testCase = new ListNode(1)
+testCase.append(1)
+testCase.append(1)
+testCase.append(2)
+testCase.append(3)
+testCase.append(3)
 testCase.printAsArray()
-let solution = deleteDuplicates(testCase)
+const solution = deleteDuplicates(testCase)
 solution.printAsArray()
