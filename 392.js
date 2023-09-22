@@ -5,14 +5,19 @@ A subsequence of a string is a new string that is formed from the original strin
 */
 
 var isSubsequence = function(s, t) {
+    if (s.length > t.length) return false
+    if (s === t) return true
     let i = 0
-    let j = 0
-    while (i < s.length && j < t.length) {
-        if (s[i] === t[j]) i++
-        j++
+    for (let char of t) {
+        if (char === s[i]) {
+            i++
+        }
+        if (i === s.length) {
+            return true
+        }
     }
-    if (i === s.length) return true
-    else return false
+    return false
 };
 
 console.log(isSubsequence('abc', 'ahbgdc'))
+console.log(isSubsequence('axc', 'ahbgdc'))
