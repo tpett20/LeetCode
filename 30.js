@@ -11,8 +11,8 @@ var findSubstring = function(s, words) {
     let wordLen = words[0].length
     let totalWordsLen = wordLen * words.length
     if (totalWordsLen > s.length) return output
-    const wordsMap = { len: words.length }
-    let checker = { len: words.length }
+    const wordsMap = {}
+    let checker = {}
     for (let word of words) {
         wordsMap[word] = wordsMap[word] ? wordsMap[word] + 1 : 1
         checker[word] = wordsMap[word]
@@ -20,14 +20,19 @@ var findSubstring = function(s, words) {
     for (let i = 0; i <= s.length - totalWordsLen; i++) {
         let str = s.slice(i, i + wordLen)
         let j = i
-        while (checker[str]) {
-            checker[str]--
-            checker.len--
-            j += wordLen
-            str = s.slice(j, j + wordLen)
-            if (checker.len === 0) output.push(i)
+        if (checker[str]) {
+            while (checker[str]) {
+                checker[str]--
+                j += wordLen
+                if (j - i === totalWordsLen) {
+                    output.push(i)
+                    break
+                } else {
+                    str = s.slice(j, j + wordLen)
+                }
+            }
+            checker = { ...wordsMap }
         }
-        checker = { ...wordsMap }
     }
     return output
 };
