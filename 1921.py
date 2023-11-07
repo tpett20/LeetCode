@@ -12,22 +12,11 @@ class Solution:
         times_to_city = []
         for i in range(len(dist)):
             time = math.ceil(dist[i] / speed[i])
-            left = 0
-            right = len(times_to_city) - 1
-            while left <= right:
-                mid = (left + right) // 2
-                if time == times_to_city[mid]:
-                    left = mid
-                    break
-                elif time < times_to_city[mid]:
-                    right = mid - 1
-                else:
-                    left = mid + 1
-            times_to_city.insert(left, time)
-        minute = 1
-        monsters = 1
-        for i in range(1, len(times_to_city)):
-            time = times_to_city[i]
+            times_to_city.append(time)
+        times_to_city.sort()
+        minute = 0
+        monsters = 0
+        for time in times_to_city:
             if minute < time:
                 monsters += 1
             else:
