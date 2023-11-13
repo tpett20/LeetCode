@@ -9,24 +9,22 @@ The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in lowercase or 
 
 var sortVowels = function(s) {
     const vowelMap = {
-        a: true, A: true,
-        e: true, E: true,
-        i: true, I: true,
-        o: true, O: true,
-        u: true, U: true
+        'A': 0, 'E': 0, 'I': 0, 'O': 0, 'U': 0,
+        'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u': 0
     }
-    const vowels = []
     for (let char of s) {
-        if (vowelMap[char]) vowels.push(char)
+        if (vowelMap[char] !== undefined) vowelMap[char]++ 
     }
-    if (!vowels.length) return s
-    vowels.sort((a, b) => {
-        return a.charCodeAt() - b.charCodeAt()
-    })
+    let sortedVowels = ''
+    for (let vowel in vowelMap) {
+        if (vowelMap[vowel]) {
+            sortedVowels += vowel.repeat(vowelMap[vowel])
+        }
+    }
     let newStr = ''
     let i = 0
     for (let char of s) {
-        if (vowelMap[char]) newStr += vowels[i++]
+        if (vowelMap[char]) newStr += sortedVowels[i++]
         else newStr += char
     }
     return newStr
