@@ -11,30 +11,18 @@ class TreeNode:
 
 class Solution:
     def diameterOfBinaryTree(self, root: [TreeNode]) -> int:
-        leaf_paths = [""]
+        max_diff = 0
         
-        def traverse(node, path = ""):
-            if node.left:
-                traverse(node.left, path + "L")
-            if node.right:
-                traverse(node.right, path + "R")
-            if not node.left and not node.right:
-                leaf_paths.append(path)
-
-        def compare_paths(path1, path2):
-            diff = i = 0
-            min_len = min(len(path1), len(path2))
-            while i < min_len and path1[i] == path2[i]:
-                i += 1
-            diff += (len(path1) - i) + (len(path2) - i)
-            return diff
+        def traverse(node):
+            left = traverse(node.left) if node.left else 0
+            right = traverse(node.right) if node.right else 0
+            diff = left + right
+            nonlocal max_diff
+            max_diff = max(diff, max_diff)
+            return max(left, right) + 1
         
         traverse(root)
-        diam = 0
-        for i in range(len(leaf_paths) - 1):
-            for j in range(i + 1, len(leaf_paths)):
-                diam = max(diam, compare_paths(leaf_paths[i], leaf_paths[j]))
-        return diam
+        return max_diff
 
 test_case = TreeNode(1)
 test_case.left = TreeNode(2)
