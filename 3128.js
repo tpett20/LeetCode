@@ -21,14 +21,13 @@ var numberOfRightTriangles = function(grid) {
     }
     for (const row in rMap) {
         const oneCols = rMap[row]
-        for (let i = 0; i < oneCols.length - 1; i++) {
-            for (let j = i + 1; j < oneCols.length; j++) {
-                count += (cMap[oneCols[i]] - 1)
-                count += (cMap[oneCols[j]] - 1)
-            }
+        for (let col of oneCols) {
+            count += (cMap[col] - 1) * (oneCols.length - 1)
         }
     }
     return count
 };
 
+console.log(numberOfRightTriangles([[0,1,0], [0,1,1], [0,1,0]]))
+console.log(numberOfRightTriangles([[1,0,0,0], [0,1,0,1], [1,0,0,0]]))
 console.log(numberOfRightTriangles([[1,0,1], [1,0,0], [1,0,0]]))
