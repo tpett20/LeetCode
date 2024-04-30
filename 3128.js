@@ -1,4 +1,4 @@
-// 3128. Right Triangles - INCOMPLETE, TIME LIMIT EXCEEDED
+// 3128. Right Triangles
 /*
 You are given a 2D boolean matrix grid.
 Return an integer that is the number of right triangles that can be made with the 3 elements of grid such that all of them have a value of 1.
