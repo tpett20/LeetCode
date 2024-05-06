@@ -1,4 +1,3 @@
-# 🚫 INCOMPLETE - Time Limit Exceeded
 # 2487. Remove Nodes From Linked List 
 # You are given the head of a linked list.
 # Remove every node which has a node with a greater value anywhere to the right side of it.
@@ -14,24 +13,25 @@ class ListNode:
 class Solution:
     def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
         vals = []
-        max_val = 0
         curr = head
         while curr:
             vals.append(curr.val)
-            if curr.val > max_val:
-                max_val = curr.val
             curr = curr.next
+        max_val = 0
+        for i in range(len(vals) - 1, -1, -1):
+            val = vals[i]
+            vals[i] = max_val
+            max_val = max(max_val, val)
         fake_head = ListNode(next=head)
         prev = fake_head
         curr = head
-        i = 1
+        i = 0
         while curr:
-            if curr.val < max_val:
+            right_max = vals[i]
+            if curr.val < right_max:
                 prev.next = curr.next
             else:
                 prev = prev.next
-                if curr.val == max_val and curr.next:
-                    max_val = max(vals[i:])
             curr = curr.next
             i += 1
         return fake_head.next
