@@ -12,7 +12,7 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def isEvenOddTree(self, root: [TreeNode]) -> bool:
+    def isEvenOddTree(self, root: TreeNode) -> bool:
         q = [root]
         even_lvl = True
         while len(q):
