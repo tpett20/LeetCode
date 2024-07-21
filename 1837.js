@@ -4,7 +4,6 @@
 
 var sumBase = function(n, k) {
     const convNum = n.toString(k)
-    console.log(convNum)
     let sum = 0
     for (const digit of convNum) {
         sum += parseInt(digit)
