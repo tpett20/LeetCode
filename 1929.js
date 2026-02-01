@@ -1,14 +1,12 @@
 // 1929. Concatenation of Array
-/*
-Given an integer array nums of length n, you want to create an array ans of length 2n where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
-Specifically, ans is the concatenation of two nums arrays.
-Return the array ans.
-*/
+// Given an integer array nums of length n, you want to create an array ans of length 2n where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
+// Specifically, ans is the concatenation of two nums arrays.
+// Return the array ans.
 
 var getConcatenation = function(nums) {
-    const ans = nums
-    for (let i = 0; i < nums.length; i++) {
-        console.log(ans)
+    const ans = Array.from(nums)
+    const len = nums.length
+    for (let i = 0; i < len; i++) {
         ans.push(nums[i])
     }
     return ans
